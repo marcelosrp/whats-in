@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
 import { NextSeo } from 'next-seo'
 import Layout from '@components/Layout'
@@ -7,6 +8,10 @@ import EmptySearch from '@components/EmptySearch'
 import * as S from './styles'
 
 export default function HomeTemplate() {
+  const [query, setQuery] = useState('')
+
+  const handleQueryChange = ({ target }) => setQuery(target.value)
+
   return (
     <Layout>
       <NextSeo
@@ -31,7 +36,14 @@ export default function HomeTemplate() {
 
       <S.Search>
         <FaSearch />
-        <Input />
+        <Input
+          type="search"
+          name="query"
+          id="query"
+          placeholder="Search movies..."
+          query={query}
+          handleQueryChange={handleQueryChange}
+        />
       </S.Search>
 
       <S.MainContent>
