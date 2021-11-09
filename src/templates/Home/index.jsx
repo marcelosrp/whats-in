@@ -5,12 +5,13 @@ import { SEARCH_API } from '@services/api'
 import Layout from '@components/Layout'
 import Input from '@components/Input'
 import EmptySearch from '@components/EmptySearch'
+import MovieCard from '@components/MovieCard'
 
 import * as S from './styles'
 
 export default function HomeTemplate() {
   const [query, setQuery] = useState('')
-  const [movie, setMovie] = useState([])
+  const [movies, setMovies] = useState([])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -22,7 +23,7 @@ export default function HomeTemplate() {
 
           if (response.status === 200) {
             const data = await response.json(response)
-            setMovie(data.results)
+            setMovies(data.results)
           }
         } catch (error) {
           console.log(error)
@@ -34,6 +35,12 @@ export default function HomeTemplate() {
   }, [query])
 
   const handleQueryChange = ({ target }) => setQuery(target.value)
+
+  const renderMoviesCard = () => {
+    return movies.map((movie) => {
+      return <MovieCard key={movie.id} movie={movie} />
+    })
+  }
 
   return (
     <Layout>
@@ -69,8 +76,8 @@ export default function HomeTemplate() {
         />
       </S.Search>
 
-      <S.MainContent>
-        {movie.length !== 0 ? <h1>Tem filme</h1> : <EmptySearch />}
+      <S.MainContent hasMovies={movies.length > 0}>
+        {movies.length === 0 ? <EmptySearch /> : renderMoviesCard()}
       </S.MainContent>
     </Layout>
   )

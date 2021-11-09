@@ -17,7 +17,10 @@ export const Search = styled.div`
 export const MainContent = styled.main`
   align-items: center;
   display: flex;
-  height: calc(100vh - 12rem);
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  height: ${({ hasMovies }) => (hasMovies ? 'auto' : 'calc(100vh - 12rem);')};
+  justify-content: ${({ hasMovies }) => (hasMovies ? 'flex-start' : 'center')};
+  padding: 3rem 0;
   width: 100%;
 `
