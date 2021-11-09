@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import Moment from 'react-moment'
+import { AiOutlineHeart } from '@react-icons/all-files/ai/AiOutlineHeart'
+import { AiFillHeart } from '@react-icons/all-files/ai/AiFillHeart'
 import 'moment/locale/pt-br'
 import { IMG_PATH } from '@services/api'
 
@@ -20,6 +22,9 @@ export default function MovieCard({ movie }) {
         quality={80}
       />
       <S.Legend>
+        <S.Fav>
+          <AiOutlineHeart />
+        </S.Fav>
         <h4>{title}</h4>
         <p>
           <Moment format="YYYY">{release_date}</Moment>
