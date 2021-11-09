@@ -1,5 +1,8 @@
-import Layout from '@components/Layout'
+import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
 import { NextSeo } from 'next-seo'
+import Layout from '@components/Layout'
+import Input from '@components/Input'
+import * as S from './styles'
 
 export default function HomeTemplate() {
   return (
@@ -23,7 +26,11 @@ export default function HomeTemplate() {
           site_name: 'NextJS - Boilerplate'
         }}
       />
-      <h1>Home</h1>
+
+      <S.Search>
+        <FaSearch />
+        <Input />
+      </S.Search>
     </Layout>
   )
 }
