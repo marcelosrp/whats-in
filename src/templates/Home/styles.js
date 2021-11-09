@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Search = styled.form`
+export const Search = styled.div`
   position: relative;
   width: 100%;
 

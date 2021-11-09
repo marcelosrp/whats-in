@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
 import { NextSeo } from 'next-seo'
+import { SEARCH_API } from '@services/api'
 import Layout from '@components/Layout'
 import Input from '@components/Input'
 import EmptySearch from '@components/EmptySearch'
@@ -9,6 +10,28 @@ import * as S from './styles'
 
 export default function HomeTemplate() {
   const [query, setQuery] = useState('')
+  const [movie, setMovie] = useState([])
+
+  useEffect(() => {
+    const getMovies = async () => {
+      if (query.length >= 3) {
+        try {
+          const response = await fetch(SEARCH_API + query)
+
+          if (!response.ok) throw new Error('Deu ruim!')
+
+          if (response.status === 200) {
+            const data = await response.json(response)
+            setMovie(data.results)
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    getMovies()
+  }, [query])
 
   const handleQueryChange = ({ target }) => setQuery(target.value)
 
@@ -47,7 +70,7 @@ export default function HomeTemplate() {
       </S.Search>
 
       <S.MainContent>
-        <EmptySearch />
+        {movie.length !== 0 ? <h1>Tem filme</h1> : <EmptySearch />}
       </S.MainContent>
     </Layout>
   )
