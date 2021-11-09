@@ -2,6 +2,8 @@ import { FaSearch } from '@react-icons/all-files/fa/FaSearch'
 import { NextSeo } from 'next-seo'
 import Layout from '@components/Layout'
 import Input from '@components/Input'
+import EmptySearch from '@components/EmptySearch'
+
 import * as S from './styles'
 
 export default function HomeTemplate() {
@@ -31,6 +33,10 @@ export default function HomeTemplate() {
         <FaSearch />
         <Input />
       </S.Search>
+
+      <S.MainContent>
+        <EmptySearch />
+      </S.MainContent>
     </Layout>
   )
 }
