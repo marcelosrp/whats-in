@@ -1,11 +1,36 @@
 import styled from 'styled-components'
 
+export const Legend = styled.figcaption`
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  font-size: 1.5rem;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+  left: 0;
+  overflow: hidden;
+  padding: 1.6rem;
+  position: absolute;
+  top: 100%;
+  transition: all 0.3s ease;
+  width: 100%;
+
+  p {
+    font-size: 1.4rem;
+    margin-top: 0.5rem;
+  }
+`
+
 export const Card = styled.figure`
   background-color: var(--background);
   height: 30rem;
   overflow: hidden;
   position: relative;
   width: 18.8rem;
+
+  &:hover ${Legend} {
+    top: 0;
+  }
 
   img {
     object-fit: cover;
