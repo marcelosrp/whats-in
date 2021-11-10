@@ -1,14 +1,13 @@
 import Image from 'next/image'
 import Moment from 'react-moment'
-import { AiOutlineHeart } from '@react-icons/all-files/ai/AiOutlineHeart'
-import { AiFillHeart } from '@react-icons/all-files/ai/AiFillHeart'
-import 'moment/locale/pt-br'
 import { IMG_PATH } from '@services/api'
+import FavButton from '@components/FavButton'
+import 'moment/locale/pt-br'
 
 import * as S from './styles'
 
-export default function MovieCard({ movie }) {
-  const { title, release_date, poster_path } = movie
+export default function MovieCard({ movie, setStorageMovie }) {
+  const { id, title, release_date, poster_path } = movie
 
   return (
     <S.Card>
@@ -22,9 +21,10 @@ export default function MovieCard({ movie }) {
         quality={80}
       />
       <S.Legend>
-        <S.Fav>
-          <AiOutlineHeart />
-        </S.Fav>
+        <FavButton
+          movieData={{ id, title }}
+          setStorageMovie={setStorageMovie}
+        />
         <h4>{title}</h4>
         <p>
           <Moment format="YYYY">{release_date}</Moment>

@@ -15,6 +15,7 @@ export default function HomeTemplate() {
   const [movies, setMovies] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(null)
+  const [storageMovie, setStorageMovie] = useState([])
 
   useEffect(() => {
     const getMovies = async () => {
@@ -40,11 +41,21 @@ export default function HomeTemplate() {
     getMovies()
   }, [query, currentPage])
 
+  useEffect(() => {
+    console.log('storage: ', storageMovie)
+  }, [storageMovie])
+
   const handleQueryChange = ({ target }) => setQuery(target.value)
 
   const renderMoviesCard = () => {
     return movies.map((movie) => {
-      return <MovieCard key={movie.id} movie={movie} />
+      return (
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          setStorageMovie={setStorageMovie}
+        />
+      )
     })
   }
 
@@ -66,7 +77,7 @@ export default function HomeTemplate() {
   return (
     <Layout>
       <NextSeo
-        title="NextJS - Boilerplate"
+        title="Whats in"
         description="A simple NextJS Boilerplate to start an project"
         canonical="https://my-trips-soares.vercel.app/"
         openGraph={{
@@ -78,10 +89,10 @@ export default function HomeTemplate() {
               url: '',
               width: 1280,
               height: 720,
-              alt: 'NextJS - Boilerplate'
+              alt: 'Whats in'
             }
           ],
-          site_name: 'NextJS - Boilerplate'
+          site_name: 'Whats in'
         }}
       />
 
